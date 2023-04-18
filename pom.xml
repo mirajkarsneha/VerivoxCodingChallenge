@@ -18,11 +18,6 @@
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-testng</artifactId>
-            <version>7.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>7.0.0</version>
         </dependency>
@@ -37,35 +32,36 @@
             <version>3.141.59</version>
         </dependency>
         <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-api</artifactId>
-            <version>3.141.59</version>
-        </dependency>
-        <dependency>
-            <groupId>info.cukes</groupId>
-            <artifactId>cucumber-picocontainer</artifactId>
-            <version>1.2.5</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vimalselvam</groupId>
-            <artifactId>cucumber-extentsreport</artifactId>
-            <version>3.0.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.aventstack</groupId>
-            <artifactId>extentreports</artifactId>
-            <version>3.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>tech.grasshopper</groupId>
-            <artifactId>extentreports-cucumber6-adapter</artifactId>
-            <version>2.13.0</version>
-        </dependency>
-        <dependency>
             <groupId>net.masterthought</groupId>
-            <artifactId>cucumber-reporting</artifactId>
-            <version>5.6.1</version>
+            <artifactId>maven-cucumber-reporting</artifactId>
+            <version>5.7.5</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>5.7.5</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>Sample-Cucumber-TestNG</projectName>
+                            <skip>false</skip>
+                            <outputDirectory>reports/html-reports</outputDirectory>
+                            <inputDirectory>target/cucumber-reports</inputDirectory>
+                            <jsonFiles>
+                                <param>**/*.json</param>
+                            </jsonFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

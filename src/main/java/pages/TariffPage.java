@@ -11,6 +11,8 @@ import java.util.List;
 
 public class TariffPage {
 
+    public static final String WWW_VERIVOX_DE = "https://www.verivox.de/";
+
     private final WebDriver driver;
     private final WebDriverWait wait;
     private final Actions builder;
@@ -31,7 +33,7 @@ public class TariffPage {
     }
 
     public void loadPageAndAcceptCookies() {
-        driver.get("https://www.verivox.de/");
+        driver.get(WWW_VERIVOX_DE);
         WebElement acceptCookiesButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='uc-btn-accept-banner']")));
         sleep();
         builder.moveToElement(acceptCookiesButton).click().perform();

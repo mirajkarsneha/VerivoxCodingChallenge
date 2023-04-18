@@ -155,4 +155,5 @@ public class TariffStepDefinition {
     public void iSeeTheZUMONLINEANTRAGButton() {
         tariffPage.zumOnlineButton();
     }
+
 }
