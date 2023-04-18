@@ -15,7 +15,7 @@ public class TariffPage {
 
     private final WebDriver driver;
     private final WebDriverWait wait;
-    private final Actions builder;
+    private final Actions actions;
     private Integer totalNoOfTariffs = 0;
 
     public Integer getTotalNoOfTariffs() {
@@ -26,25 +26,25 @@ public class TariffPage {
         this.totalNoOfTariffs = totalNoOfTariffs;
     }
 
-    public TariffPage(WebDriver driver, WebDriverWait wait, Actions builder) {
+    public TariffPage(WebDriver driver, WebDriverWait wait, Actions actions) {
         this.driver = driver;
         this.wait = wait;
-        this.builder = builder;
+        this.actions = actions;
     }
 
     public void loadPageAndAcceptCookies() {
         driver.get(WWW_VERIVOX_DE);
         WebElement acceptCookiesButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id='uc-btn-accept-banner']")));
         sleep();
-        builder.moveToElement(acceptCookiesButton).click().perform();
+        actions.moveToElement(acceptCookiesButton).click().perform();
     }
 
     public void navigateToPrivathaftpflichtPage() {
         WebElement versicherungen = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Versicherungen")));
-        builder.moveToElement(versicherungen).build().perform();
+        actions.moveToElement(versicherungen).build().perform();
 
         WebElement privathaftpflicht = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Privathaftpflicht")));
-        builder.moveToElement(privathaftpflicht).click().perform();
+        actions.moveToElement(privathaftpflicht).click().perform();
     }
 
     public void enterAgeAndMaritalStatus() {
@@ -54,7 +54,7 @@ public class TariffPage {
         familienstand.selectByIndex(0);
 
         driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/section/div[1]/form/div[3]"));
-        builder.sendKeys("31").perform();
+        actions.sendKeys("31").perform();
 
         WebElement jetztVergleichenButton = driver.findElement(By.xpath("/html/body/div[1]/main/div[1]/div/section/div[1]/form/button"));
         jetztVergleichenButton.submit();
@@ -62,20 +62,20 @@ public class TariffPage {
 
     public void enterBirthDate() {
         WebElement birthdate = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"vx-insurance\"]/section/pli-prefilter-page/prefilter-page/main/section/su-signup-form/form/form-factory/section/form-type/section/fieldset[1]/form-factory/section/form-group-type/section/su-signup-field/div/div/value/fieldset[2]/form-factory/section/birthday-type/element-scaffold/section/div[2]/su-signup-field/div/div/value/su-date-picker/div/input")));
-        builder.moveToElement(birthdate).click().perform();
-        builder.sendKeys("15.07.1991").perform();
+        actions.moveToElement(birthdate).click().perform();
+        actions.sendKeys("15.07.1991").perform();
     }
 
     public void enterZipCode() {
         WebElement zipcode = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"prestep_postcode\"]")));
-        builder.moveToElement(zipcode).click().perform();
-        builder.sendKeys("13088").perform();
+        actions.moveToElement(zipcode).click().perform();
+        actions.sendKeys("13088").perform();
     }
 
     public void clickJetztVergleichenButton() {
         WebElement jetztVergleichenButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"vx-insurance\"]/section/pli-prefilter-page/prefilter-page/main/section/div/div[2]/button")));
         sleep();
-        builder.moveToElement(jetztVergleichenButton).click().perform();
+        actions.moveToElement(jetztVergleichenButton).click().perform();
     }
 
     public void verifyTariffsGreaterThan(int noOfTariffs) {
@@ -108,13 +108,13 @@ public class TariffPage {
     public void clickLoadMoreTariffsButton() {
         WebElement loadMoreButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"vx-insurance\"]/section/pli-page/pli-page-v2/main/section/div[1]/section/product-list/more-products-button/div/a[1]")));
         sleep();
-        builder.moveToElement(loadMoreButton).click().perform();
+        actions.moveToElement(loadMoreButton).click().perform();
     }
 
     public void clickLoadAllTariffs() {
         WebElement loadAllButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"vx-insurance\"]/section/pli-page/pli-page-v2/main/section/div[1]/section/product-list/more-products-button/div/a[2]")));
         sleep();
-        builder.moveToElement(loadAllButton).click().perform();
+        actions.moveToElement(loadAllButton).click().perform();
     }
 
     public void scrollAndLoadMoreTariffs() {
@@ -131,13 +131,13 @@ public class TariffPage {
     }
 
     public void tariffPrice() {
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"vx-insurance\"]/section/pli-page/pli-page-v2/main/section/div[1]/section/product-list/div[1]/product[1]/section/div/div/div[3]/div[1]/div[2]/div[1]\n")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"vx-insurance\"]/section/pli-page/pli-page-v2/main/section/div[1]/section/product-list/div[1]/product[1]/section/div/div/div[3]/div[1]/div[2]/div[1]")));
     }
 
     public void clickButtonTariffDetails() {
         WebElement tariffDetailsButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"vx-insurance\"]/section/pli-page/pli-page-v2/main/section/div[1]/section/product-list/div[1]/product[1]/section/div/div/div[3]/div[2]/button[1]")));
         sleep();
-        builder.moveToElement(tariffDetailsButton).click().perform();
+        actions.moveToElement(tariffDetailsButton).click().perform();
     }
 
     public void loadTariffDetails() {
@@ -153,6 +153,14 @@ public class TariffPage {
 
     public void zumOnlineButton() {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"vx-insurance\"]/section/pli-page/pli-page-v2/main/section/div[1]/section/product-list/div[1]/product[1]/section/div/div[1]/div[3]/div[2]/button[2]")));
+    }
+
+    public void verifyTotalTariffs() {
+        WebElement totalTariffsText = driver.findElement(By.xpath("//*[@id=\"vx-insurance\"]/section/pli-page/pli-page-v2/main/section/div[1]/section/div/div[1]/filtered-products-hint/span"));
+        wait.until(ExpectedConditions.visibilityOf(totalTariffsText));
+        String[] strings = totalTariffsText.getText().split(" ");
+        setTotalNoOfTariffs(Integer.valueOf(strings[0]));
+        Assert.assertTrue(getTotalNoOfTariffs() > 0);
     }
 
     private void sleep() {
